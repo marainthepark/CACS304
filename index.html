@@ -5,117 +5,166 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CACS304 Arts Career Discovery Quiz</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #667eea;
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 20px;
+            line-height: 1.6;
         }
 
         .container {
             background: white;
-            border-radius: 15px;
-            padding: 30px;
-            max-width: 600px;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 700px;
             width: 100%;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
         }
 
         h1 {
-            color: #333;
+            color: #2d3748;
             text-align: center;
-            margin-bottom: 20px;
-            font-size: 2em;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            font-weight: 700;
         }
 
-        .intro {
+        .subtitle {
             text-align: center;
-            color: #666;
-            margin-bottom: 30px;
-            line-height: 1.5;
+            color: #718096;
+            margin-bottom: 40px;
+            font-size: 1.1em;
         }
 
         .question-section {
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
         }
 
         .question-number {
             color: #667eea;
-            font-weight: bold;
-            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 1.1em;
         }
 
         .question {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 20px;
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 25px;
         }
 
         .option {
-            background: #f8f9fa;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 10px;
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         .option:hover {
-            background: #e9ecef;
+            background: #edf2f7;
             border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
         }
 
         .option.selected {
-            background: #667eea;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.25);
         }
 
         .option-title {
-            font-weight: bold;
-            margin-bottom: 5px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 1.1em;
         }
 
         .option-desc {
-            font-size: 0.9em;
+            font-size: 0.95em;
             opacity: 0.8;
+            line-height: 1.5;
         }
 
         .buttons {
             display: flex;
             justify-content: space-between;
-            margin-top: 30px;
+            margin-top: 40px;
+            gap: 15px;
         }
 
         .btn {
-            padding: 12px 25px;
+            padding: 15px 30px;
             border: none;
-            border-radius: 20px;
-            font-weight: bold;
+            border-radius: 25px;
+            font-weight: 600;
             cursor: pointer;
             font-size: 1em;
+            transition: all 0.3s ease;
+            flex: 1;
+            max-width: 150px;
         }
 
         .btn-primary {
-            background: #667eea;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
         }
 
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
         .btn-primary:disabled {
-            background: #ccc;
+            background: #cbd5e0;
             cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
         .btn-secondary {
-            background: #f8f9fa;
-            color: #666;
-            border: 2px solid #e9ecef;
+            background: #f7fafc;
+            color: #4a5568;
+            border: 2px solid #e2e8f0;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: #edf2f7;
+            border-color: #cbd5e0;
         }
 
         .btn-secondary:disabled {
@@ -125,100 +174,186 @@
 
         .progress {
             width: 100%;
-            height: 6px;
-            background: #e9ecef;
-            border-radius: 3px;
-            margin-bottom: 30px;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            margin-bottom: 40px;
+            overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            background: #667eea;
-            border-radius: 3px;
-            transition: width 0.3s;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 4px;
+            transition: width 0.4s ease;
         }
 
         .result {
             display: none;
             text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .result h2 {
-            color: #333;
-            font-size: 2em;
-            margin-bottom: 20px;
+            color: #2d3748;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            font-weight: 700;
         }
 
         .career-box {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 30px;
-            margin: 20px 0;
+            background: linear-gradient(135deg, #f7fafc, #edf2f7);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
             text-align: left;
+            border: 2px solid #e2e8f0;
         }
 
         .career-title {
-            font-size: 1.8em;
-            color: #667eea;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .career-desc {
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 20px;
+            font-size: 2em;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
         }
 
         .career-link {
             display: inline-block;
-            background: #667eea;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            padding: 12px 25px;
+            padding: 18px 35px;
             text-decoration: none;
-            border-radius: 20px;
-            font-weight: bold;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+            width: 100%;
+            text-align: center;
+            transition: all 0.3s ease;
         }
 
         .career-link:hover {
-            background: #5a6fd8;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
         }
 
-        .next-steps {
+        .action-steps {
             background: white;
             border: 2px solid #667eea;
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 20px;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 25px;
+        }
+
+        .action-steps h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        .action-steps ul {
+            color: #4a5568;
+            line-height: 1.8;
+            margin: 0;
+            padding-left: 25px;
+        }
+
+        .action-steps li {
+            margin-bottom: 12px;
+            font-weight: 500;
         }
 
         .restart {
-            margin-top: 20px;
-            background: #f8f9fa;
-            color: #666;
-            border: 2px solid #e9ecef;
+            margin-top: 30px;
+            background: #f7fafc;
+            color: #4a5568;
+            border: 2px solid #e2e8f0;
         }
 
-        @media (max-width: 600px) {
+        .restart:hover {
+            background: #edf2f7;
+            border-color: #cbd5e0;
+        }
+
+        .github-link {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 600;
+            font-size: 0.9em;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .github-link:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
             .container {
-                padding: 20px;
+                padding: 25px;
+                margin: 10px;
             }
             
             h1 {
-                font-size: 1.5em;
+                font-size: 2em;
             }
             
             .buttons {
                 flex-direction: column;
-                gap: 10px;
+                gap: 15px;
+            }
+
+            .btn {
+                max-width: none;
+            }
+
+            .github-link {
+                position: static;
+                display: inline-block;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .option {
+                padding: 15px;
+            }
+
+            .career-box {
+                padding: 25px;
+            }
+
+            .action-steps {
+                padding: 20px;
             }
         }
     </style>
 </head>
 <body>
+    <a href="https://github.com" class="github-link">📚 CACS304 Resources</a>
+    
     <div class="container">
-        <h1>CACS304 Arts Career Discovery</h1>
-        <p class="intro">Discover the perfect arts career that matches your interests and working style. Answer 7 questions to get your personalized recommendation.</p>
+        <h1>CACS304</h1>
+        <p class="subtitle">Arts Career Discovery Quiz</p>
 
         <div id="quiz-section">
             <div class="progress">
@@ -226,28 +361,30 @@
             </div>
             
             <div class="question-section">
-                <div class="question-number" id="question-num"></div>
+                <div class="question-header">
+                    <div class="question-number" id="question-num"></div>
+                </div>
                 <div class="question" id="question-text"></div>
                 <div id="options-container"></div>
             </div>
 
             <div class="buttons">
-                <button class="btn btn-secondary" id="back-btn" onclick="previousQuestion()" disabled>Back</button>
-                <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()" disabled>Next</button>
+                <button class="btn btn-secondary" id="back-btn" onclick="previousQuestion()" disabled>← Back</button>
+                <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()" disabled>Next →</button>
             </div>
         </div>
 
         <div class="result" id="result-section">
-            <h2>Your Perfect Career Match!</h2>
+            <h2>Your Career Match!</h2>
             <div id="result-content"></div>
-            <button class="btn restart" onclick="restartQuiz()">Take Quiz Again</button>
+            <button class="btn restart" onclick="restartQuiz()">🔄 Try Another Path</button>
         </div>
     </div>
 
     <script>
         const questions = [
             {
-                question: "Which of these broad artistic fields do you think you'd like to move towards?",
+                question: "In which broader discipline do you see yourself finding a career?",
                 options: [
                     { id: "visual_fine", text: "Visual Arts - Fine Art", desc: "Painting, drawing, sculpture, printmaking, illustration" },
                     { id: "visual_design", text: "Visual Arts - Design", desc: "Graphic design, typography, photography, fashion, architecture" },
@@ -260,241 +397,316 @@
                 ]
             },
             {
-                question: "Which particular areas in your chosen discipline excites you most?",
+                question: "What draws you to creative work beyond artistic expression?",
                 options: [
-                    { id: "traditional", text: "Traditional Techniques", desc: "Classical methods, historical practices, conservation", condition: "visual_fine" },
-                    { id: "contemporary", text: "Contemporary Expression", desc: "Modern art, experimental techniques, personal expression", condition: "visual_fine" },
-                    { id: "illustration", text: "Illustration & Narrative", desc: "Storytelling through images, children's books, editorial", condition: "visual_fine" },
-                    { id: "commercial", text: "Commercial Design", desc: "Branding, advertising, marketing materials", condition: "visual_design" },
-                    { id: "editorial", text: "Editorial & Publishing", desc: "Magazine design, book design, layout", condition: "visual_design" },
-                    { id: "photography", text: "Photography", desc: "Capturing moments, architectural, performance, wedding", condition: "visual_design" },
-                    { id: "acting", text: "Acting & Performance", desc: "Being on stage, character development, live performance", condition: "performance_theatre" },
-                    { id: "directing", text: "Directing & Vision", desc: "Leading creative teams, shaping artistic vision", condition: "performance_theatre" },
-                    { id: "technical", text: "Technical Production", desc: "Set design, lighting, sound, backstage work", condition: "performance_theatre" },
-                    { id: "specialty", text: "Specialized Theatre", desc: "Intimacy coordination, fight direction, special skills", condition: "performance_theatre" },
-                    { id: "choreography", text: "Choreography & Creation", desc: "Creating movement, teaching dance, artistic direction", condition: "performance_dance" },
-                    { id: "performance", text: "Performance & Embodiment", desc: "Being a performer, physical expression, live shows", condition: "performance_dance" },
-                    { id: "circus", text: "Circus & Specialty", desc: "Acrobatics, juggling, magic, physical comedy", condition: "performance_dance" },
-                    { id: "composition", text: "Composition & Creation", desc: "Writing music, arranging, sound design", condition: "music" },
-                    { id: "musical_performance", text: "Musical Performance", desc: "Playing instruments, singing, conducting", condition: "music" },
-                    { id: "music_industry", text: "Music Industry", desc: "Production, management, broadcasting, business", condition: "music" },
-                    { id: "filmmaking", text: "Filmmaking & Direction", desc: "Directing, producing, cinematography", condition: "film_digital" },
-                    { id: "digital_art", text: "Digital Art & Technology", desc: "Digital art, animation, VFX, interactive media", condition: "film_digital" },
-                    { id: "gaming", text: "Gaming & Interactive", desc: "Game design, narrative design, user experience", condition: "film_digital" },
-                    { id: "casting", text: "Casting & Talent", desc: "Finding talent, casting direction, representation", condition: "film_digital" },
-                    { id: "creative_writing", text: "Creative Writing", desc: "Fiction, poetry, playwriting, screenwriting", condition: "literary" },
-                    { id: "editing", text: "Editing & Publishing", desc: "Manuscript editing, book publishing, literary magazines", condition: "literary" },
-                    { id: "library", text: "Library & Research", desc: "Information science, archival work, research", condition: "literary" },
-                    { id: "therapy", text: "Literary Therapy", desc: "Bibliotherapy, writing for healing, community programs", condition: "literary" },
-                    { id: "traditional_craft", text: "Traditional Craftsmanship", desc: "Heritage techniques, artisan skills, handmade objects", condition: "craft_applied" },
-                    { id: "contemporary_craft", text: "Contemporary Craft", desc: "Modern approaches, experimental materials, art jewelry", condition: "craft_applied" },
-                    { id: "fashion", text: "Fashion & Wearables", desc: "Clothing design, accessories, wearable art", condition: "craft_applied" }
+                    { id: "helping_healing", text: "Helping & Healing Others", desc: "Using creativity for therapy, education, community building" },
+                    { id: "preserving_heritage", text: "Connecting Past & Future", desc: "Being a bridge between history and contemporary culture" },
+                    { id: "technology_innovation", text: "Technology & Innovation", desc: "Cutting-edge digital tools, experimental techniques" },
+                    { id: "business_strategy", text: "Creative Industries & Impact", desc: "Where creativity meets commerce, shaping cultural markets" },
+                    { id: "storytelling_narrative", text: "Storytelling & Narrative", desc: "Creating compelling stories across different mediums" },
+                    { id: "technical_mastery", text: "Mastery & Precision", desc: "Perfecting specialized techniques, expert craftsmanship" },
+                    { id: "social_impact", text: "Social Impact & Community", desc: "Art for social change, community engagement" }
                 ]
             },
             {
-                question: "Do you have any other interests or hobbies that could inform your career?",
+                question: "Do you have any other interests or hobbies?",
                 options: [
-                    { id: "animals", text: "Animals & Nature", desc: "Wildlife, pets, environmental conservation" },
-                    { id: "history", text: "History & Heritage", desc: "Historical periods, archaeology, museums" },
-                    { id: "technology", text: "Technology & Innovation", desc: "Latest tech, AI, digital trends" },
-                    { id: "psychology", text: "Psychology & Healing", desc: "Mental health, therapy, helping others" },
-                    { id: "travel", text: "Travel & Different Cultures", desc: "International experiences, languages" },
-                    { id: "law", text: "Law & Justice", desc: "Legal systems, advocacy, rights" },
-                    { id: "weddings", text: "Weddings & Special Events", desc: "Celebrations, live events, special moments" },
-                    { id: "business", text: "Business & Entrepreneurship", desc: "Starting ventures, management, sales" },
-                    { id: "none", text: "No Specific Hobby Focus", desc: "Focus purely on artistic interests" }
+                    { id: "animals_nature", text: "Animals & Natural World", desc: "Wildlife, pets, environmental conservation, outdoor adventures" },
+                    { id: "law_justice", text: "Law & Justice", desc: "Legal dramas, true crime, advocacy, fairness and rights" },
+                    { id: "psychology_therapy", text: "Psychology & Human Behavior", desc: "Mental health, personal growth, understanding others" },
+                    { id: "history_culture", text: "History & Cultural Heritage", desc: "Past civilizations, museums, archaeology, traditions" },
+                    { id: "events_experiences", text: "Events & Experiences", desc: "Event planning, festivals, creating memorable experiences" },
+                    { id: "games_interactive", text: "Gaming & Interactive Media", desc: "Video games, interactive storytelling, virtual worlds" },
+                    { id: "fashion_style", text: "Fashion & Personal Expression", desc: "Style, trends, self-expression through appearance" },
+                    { id: "no_specialty", text: "Nothing Specific", desc: "Open to various applications of creative skills" }
                 ]
             },
             {
-                question: "What type of creative work energizes you most?",
+                question: "What type of work environment energizes you most?",
                 options: [
-                    { id: "solo", text: "Solo Deep Work", desc: "Intensive focus, personal projects, studio time" },
-                    { id: "collaborative", text: "Collaborative Team Projects", desc: "Working with others, shared creative vision" },
-                    { id: "teaching", text: "Teaching & Sharing Knowledge", desc: "Helping others learn, workshops, education" },
-                    { id: "performing", text: "Public Performance", desc: "Live audiences, being on stage, public speaking" },
-                    { id: "behind_scenes", text: "Behind-the-Scenes Magic", desc: "Supporting others' creativity, technical work" },
-                    { id: "problem_solving", text: "Creative Problem Solving", desc: "Finding solutions, troubleshooting, innovation" }
+                    { id: "institutions_heritage", text: "Institutions & Heritage", desc: "Government, courts, historic institutions" },
+                    { id: "arts_centres", text: "Arts Centres & Creative Hubs", desc: "Galleries, theatres, creative spaces, artist studios" },
+                    { id: "healing_wellness", text: "Healing & Wellness Spaces", desc: "Clinics, community centers, supportive environments" },
+                    { id: "alternative_spaces", text: "Alternative & Unconventional", desc: "Street art, festivals, pop-up venues" },
+                    { id: "intimate_studios", text: "Intimate & Personal", desc: "Private studios, one-on-one client work" },
+                    { id: "fast_paced", text: "Fast-Paced Environments", desc: "High-energy creative industries, agencies" },
+                    { id: "community_education", text: "Community & Educational", desc: "Schools, libraries, community programs" }
                 ]
             },
             {
-                question: "What work environment would suit you best?",
+                question: "How do you prefer to work with others?",
                 options: [
-                    { id: "cultural", text: "Traditional Cultural Spaces", desc: "Museums, galleries, concert halls, libraries" },
-                    { id: "commercial", text: "Commercial & Fast-Paced", desc: "Media companies, agencies, commercial studios" },
-                    { id: "community", text: "Community & Grassroots", desc: "Community centers, schools, local organizations" },
-                    { id: "freelance", text: "Freelance & Varied Locations", desc: "Different venues, client sites, flexible spaces" },
-                    { id: "corporate", text: "Corporate & Professional", desc: "Law firms, architecture firms, corporate settings" },
-                    { id: "alternative", text: "Alternative & Unique Settings", desc: "Unconventional venues, outdoor spaces" }
+                    { id: "documenting_recording", text: "Documenting & Recording", desc: "Capturing important moments through creative work" },
+                    { id: "one_on_one", text: "One-on-One", desc: "Individual guidance, personal connections" },
+                    { id: "behind_scenes", text: "Behind the Scenes", desc: "Essential work that enables others to shine" },
+                    { id: "digital_virtual", text: "Digital & Virtual", desc: "Online communities, digital platforms" },
+                    { id: "collaborative_teams", text: "Collaborative Teams", desc: "Working with groups of specialists" },
+                    { id: "community_engagement", text: "Community Engagement", desc: "Teaching, mentoring, connecting with communities" }
                 ]
             },
             {
-                question: "What schedule appeals to you most?",
+                question: "Which specialized area intrigues you most?",
                 options: [
-                    { id: "regular", text: "Regular Business Hours", desc: "9-5 schedule, weekends free, predictable routine" },
-                    { id: "evening", text: "Evening & Performance Schedule", desc: "Night work, weekend performances, flexible days" },
-                    { id: "project", text: "Project-Based Intensive", desc: "Busy periods followed by breaks, seasonal work" },
-                    { id: "flexible", text: "Completely Flexible", desc: "Set your own hours, work from anywhere" },
-                    { id: "travel", text: "Travel & Touring", desc: "Regular travel, different locations, mobile lifestyle" }
+                    { id: "working_with_animals", text: "Working with Animals", desc: "Training, coordinating animals in creative contexts" },
+                    { id: "live_creation", text: "Live Artistic Creation", desc: "Creating art in real-time while audiences watch" },
+                    { id: "preservation_restoration", text: "Preservation & Restoration", desc: "Saving artworks and cultural artifacts" },
+                    { id: "documentation_recording", text: "Documentation & Recording", desc: "Capturing important events through creative means" },
+                    { id: "healing_through_creativity", text: "Healing Through Creativity", desc: "Using artistic practices for therapy" },
+                    { id: "interactive_storytelling", text: "Interactive Storytelling", desc: "Creating narratives where audiences shape the story" },
+                    { id: "niche_expertise", text: "Niche Cultural Expertise", desc: "Becoming a specialist in unique cultural areas" },
+                    { id: "technical_craftsmanship", text: "Technical Craftsmanship", desc: "Mastering behind-the-scenes technical skills" }
                 ]
             },
             {
-                question: "How do you prefer to interact with people in your work?",
+                question: "What motivates you most about pursuing a creative career?",
                 options: [
-                    { id: "large_audiences", text: "Large Audiences", desc: "Performing, speaking, broadcasting to many people" },
-                    { id: "small_groups", text: "Small Groups & Workshops", desc: "Teaching, leading small teams, intimate settings" },
-                    { id: "one_on_one", text: "One-on-One Interactions", desc: "Client work, therapy, personal guidance" },
-                    { id: "creative_teams", text: "Creative Collaborators", desc: "Working with other artists, professional teams" },
-                    { id: "minimal", text: "Minimal Daily Interaction", desc: "Independent work, occasional meetings, studio focus" }
+                    { id: "witness_history", text: "Witnessing & Recording History", desc: "Being present for important events" },
+                    { id: "heal_transform", text: "Healing & Transformation", desc: "Using creativity to help others grow" },
+                    { id: "preserve_culture", text: "Preserving Cultural Heritage", desc: "Maintaining traditions for future generations" },
+                    { id: "push_boundaries", text: "Pushing Creative Boundaries", desc: "Exploring new forms and experimental approaches" },
+                    { id: "connect_communities", text: "Connecting Communities", desc: "Bringing people together through creativity" },
+                    { id: "master_craft", text: "Mastering Specialized Craft", desc: "Developing deep expertise in unique skills" },
+                    { id: "create_experiences", text: "Creating Memorable Experiences", desc: "Designing moments people will treasure" }
                 ]
             }
         ];
 
-        const careers = {
-            "visual_fine_traditional_animals": { 
-                title: "Wildlife Illustrator", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-wildlife-illustrator-2742683/", 
-                desc: "Combine your love of art and nature by creating detailed scientific and artistic illustrations of wildlife. Work with researchers, publishers, and conservation organizations to bring the natural world to life through your art." 
-            },
-            "visual_fine_illustration_none": { 
-                title: "Picture Book Illustrator", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-picture-book-illustrator-2589123/", 
-                desc: "Bring stories to life through illustrations for children's books. Create magical worlds that inspire young readers and work closely with authors and publishers." 
-            },
-            "visual_fine_contemporary_weddings": { 
-                title: "Live Wedding Painter", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-live-wedding-painter-2736510/", 
-                desc: "Create beautiful live paintings during wedding ceremonies and special events. Capture precious moments in real-time while guests watch your artistic process unfold." 
-            },
-            "visual_design_photography_weddings": { 
-                title: "Live Wedding Painter", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-live-wedding-painter-2736510/", 
-                desc: "Capture the magic of special moments through live artistic creation rather than traditional photography." 
-            },
-            "visual_design_photography_history": { 
-                title: "Architectural Photographer", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-architectural-photographer-2738165/", 
-                desc: "Document buildings and architectural heritage through photography. Work with architects, heritage organizations, and publications to preserve our built environment." 
-            },
-            "visual_design_editorial_none": { 
-                title: "Magazine Art Director", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-magazine-art-director-2740679/", 
-                desc: "Lead the visual identity of magazines and publications. Shape how stories are told through typography, layout, and visual design." 
-            },
-            "performance_theatre_acting_none": { 
-                title: "Actor", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-actor-2645564/", 
-                desc: "Bring characters to life on stage, screen, and beyond. Develop your craft through training, auditions, and performances in theatre, film, and television." 
-            },
-            "performance_theatre_directing_none": { 
-                title: "Director, Independent Theatre", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-director-independent-theatre-2753835/", 
-                desc: "Lead creative vision and direct independent theatre productions. Shape artistic experiences and guide actors and creative teams to bring stories to life." 
-            },
-            "performance_theatre_technical_none": { 
-                title: "Scenic Painter", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-scenic-painter-2764017/", 
-                desc: "Create the visual world of theatre through painted backdrops and scenic elements. Bring designers' visions to life with your artistic and technical skills." 
-            },
-            "performance_theatre_specialty_psychology": { 
-                title: "Intimacy Coordinator", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-intimacy-coordinator-2637453/", 
-                desc: "Ensure safety and consent in intimate scenes for theatre and film. Use your understanding of psychology and performance to create safe creative spaces." 
-            },
-            "performance_dance_circus_none": { 
-                title: "Illusionist", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-illusionist-2718569/", 
-                desc: "Create wonder and amazement through magic and illusion performances. Combine theatrical skills with technical mastery to mystify and entertain audiences." 
-            },
-            "music_composition_technology": { 
-                title: "Soundscape Designer", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-soundscape-designer-2659298/", 
-                desc: "Create immersive audio environments for theatre, film, installations, and digital media. Use technology and creativity to design sonic experiences." 
-            },
-            "music_musical_performance_none": { 
-                title: "Conductor", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-conductor-2758945/", 
-                desc: "Lead orchestras and musical ensembles to create transcendent musical experiences. Guide musicians and interpret classical and contemporary works." 
-            },
-            "music_music_industry_business": { 
-                title: "MusicNSW CEO", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-musicnsw-ceo-2774789/", 
-                desc: "Lead music industry organizations and advocate for musicians' rights and opportunities. Shape the future of the music industry through policy and support." 
-            },
-            "film_digital_casting_business": { 
-                title: "Hollywood Casting Director", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-hollywood-casting-director-2780628/", 
-                desc: "Discover and select the perfect actors for film and television productions. Shape stories by finding the right talent to bring characters to life." 
-            },
-            "film_digital_gaming_technology": { 
-                title: "Narrative Designer", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-narrative-designer-2651907/", 
-                desc: "Create compelling storylines and dialogue for video games and interactive media. Blend storytelling with technology to create immersive experiences." 
-            },
-            "film_digital_digital_art_technology": { 
-                title: "2D Type Artist", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-2d-type-artist-2722309/", 
-                desc: "Create animated typography and motion graphics that make words dance and stories come alive in digital media." 
-            },
-            "literary_creative_writing_none": { 
-                title: "Playwright", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-playwright-2703245/", 
-                desc: "Write scripts and plays that move audiences and explore the human condition. Create works that live on stage and resonate with communities." 
-            },
-            "literary_editing_none": { 
-                title: "Publishing Managing Editor", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-publishing-managing-editor-2665122/", 
-                desc: "Oversee the editorial process that transforms manuscripts into published books. Guide writers and coordinate teams to bring literature to readers." 
-            },
-            "literary_library_history": { 
-                title: "Librarian", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-librarian-2754481/", 
-                desc: "Be the guardian of knowledge and stories. Help people discover information, support research, and maintain collections that serve communities." 
-            },
-            "literary_therapy_psychology": { 
-                title: "Bibliotherapist", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-bibliotherapist-2673576/", 
-                desc: "Use the power of literature to heal and help others. Guide people through therapeutic reading programs that support mental health and personal growth." 
-            },
-            "craft_applied_fashion_none": { 
-                title: "Tattoo Artist", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-tattoo-artist-2642238/", 
-                desc: "Create permanent artworks on the human body. Combine artistic skill with client collaboration to design meaningful, beautiful tattoos." 
-            },
-            "craft_applied_traditional_craft_animals": { 
-                title: "Paper Artist", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-paper-artist-2710217/", 
-                desc: "Transform humble paper into extraordinary sculptures and artworks. Explore the endless possibilities of this versatile medium." 
-            },
-            "animals_specialty": { 
-                title: "Dog Wrangler", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-dog-wrangler-2738567/", 
-                desc: "Train and coordinate animals for film, television, and theatre productions. Combine your love of animals with entertainment industry work." 
-            },
-            "law_specialty": { 
-                title: "Court Artist", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-court-artist-2618234/", 
-                desc: "Create live illustrations of court proceedings for media and legal documentation. Witness history while practicing your artistic skills." 
-            },
-            "history_specialty": { 
-                title: "Museum Shipkeeper", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-museum-shipkeeper-2700464/", 
-                desc: "Maintain and preserve historic ships and maritime artifacts. Be a custodian of maritime heritage for future generations." 
-            },
-            "technology_specialty": { 
-                title: "Games Curator", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-games-curator-2696516/", 
-                desc: "Elevate video games as cultural artifacts by curating exhibitions and building collections that showcase gaming as art." 
-            },
-            "psychology_specialty": { 
-                title: "Drama Therapist", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-drama-therapist-2672740/", 
-                desc: "Use theatre techniques to help people heal and grow. Combine your understanding of psychology with performance to create therapeutic experiences." 
-            },
-            "default": { 
-                title: "Arts and Community Centre Manager", 
-                url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-arts-and-community-centre-manager-2771451/", 
-                desc: "Lead community arts venues and programs. Create spaces where creativity flourishes and communities come together through art." 
-            }
+        // Comprehensive career mappings with improved cross-disciplinary logic
+        const careerMappings = {
+            // LAW & JUSTICE - Strong hobby matches
+            "law_justice": { title: "Court Artist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-court-artist-2618234/" },
+            "law_justice_institutions_heritage": { title: "Arts Lawyer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-arts-lawyer-2608234/" },
+            "law_justice_fast_paced": { title: "Legal Editor", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-legal-editor-2738904/" },
+            
+            // ANIMALS & NATURE - Strong hobby matches
+            "animals_nature": { title: "Dog Wrangler", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-dog-wrangler-2738567/" },
+            "visual_fine_animals_nature": { title: "Wildlife Illustrator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-wildlife-illustrator-2742683/" },
+            "visual_design_animals_nature": { title: "Wildlife Photographer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-wildlife-illustrator-2742683/" },
+            "craft_applied_animals_nature": { title: "Museum Preparator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-museum-preparator-2638901/" },
+            "film_digital_animals_nature": { title: "Dog Wrangler", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-dog-wrangler-2738567/" },
+
+            // EVENTS & EXPERIENCES - Strong hobby matches
+            "events_experiences": { title: "Live Wedding Painter", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-live-wedding-painter-2736510/" },
+            "events_experiences_alternative_spaces": { title: "Festival Director of the Darwin Street Art Festival", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-festival-director-of-the-darwin-street-art-festival-2774567/" },
+            "events_experiences_fast_paced": { title: "Producer, Perth Festival", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-producer-perth-festival-2602789/" },
+            "events_experiences_arts_centres": { title: "Art Fair Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-art-fair-director-2644567/" },
+            "visual_design_events_experiences": { title: "Art Fair Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-art-fair-director-2644567/" },
+            "performance_dance_events_experiences": { title: "Spiegeltents Australia Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-alison-neville-director-spiegeltents-australia-2774345/" },
+            "performance_theatre_events_experiences": { title: "Cabaret Artist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-cabaret-artist-2774893/" },
+            "music_events_experiences": { title: "Producer, Perth Festival", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-producer-perth-festival-2602789/" },
+            "craft_applied_events_experiences": { title: "Art Fair Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-art-fair-director-2644567/" },
+
+            // PSYCHOLOGY & THERAPY - Strong hobby matches
+            "psychology_therapy": { title: "Bibliotherapist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-bibliotherapist-2673576/" },
+            "performance_theatre_psychology_therapy": { title: "Drama Therapist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-drama-therapist-2672740/" },
+            "performance_theatre_psychology_therapy_healing_wellness": { title: "Intimacy Coordinator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-intimacy-coordinator-2637453/" },
+            "performance_dance_psychology_therapy": { title: "Physical Comedy and Clown Teacher", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-physical-comedy-and-clown-teacher-2665789/" },
+            "literary_psychology_therapy": { title: "Writing Coach", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-writing-coach-2773891/" },
+
+            // HISTORY & CULTURE - Strong hobby matches
+            "history_culture": { title: "Time-Based Art Conservator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-time-based-art-conservator-2717433/" },
+            "history_culture_institutions_heritage": { title: "Photography Curator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-photography-curator-2745729/" },
+            "visual_design_history_culture": { title: "Architectural Historian and Writer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-architectural-historian-and-writer-2658234/" },
+            "literary_history_culture": { title: "Art Magazine Editor", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-art-magazine-editor-2610234/" },
+            "craft_applied_history_culture": { title: "Time-Based Art Conservator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-time-based-art-conservator-2717433/" },
+
+            // GAMES & INTERACTIVE - Strong hobby matches
+            "games_interactive": { title: "Narrative Designer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-narrative-designer-2651907/" },
+            "games_interactive_arts_centres": { title: "Games Curator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-games-curator-2696516/" },
+            "film_digital_games_interactive": { title: "Games Curator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-games-curator-2696516/" },
+            "visual_design_games_interactive": { title: "2D Type Artist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-2d-type-artist-2722309/" },
+            "literary_games_interactive": { title: "Narrative Designer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-narrative-designer-2651907/" },
+            "music_games_interactive": { title: "Audio Book Producer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-audio-book-producer-2626789/" },
+
+            // FASHION & STYLE - Strong hobby matches
+            "fashion_style": { title: "Tattoo Artist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-tattoo-artist-2642238/" },
+            "visual_fine_fashion_style": { title: "Tattoo Artist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-tattoo-artist-2642238/" },
+            "visual_design_fashion_style": { title: "Fashion and Textiles Curator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-fashion-and-textiles-curator-2622345/" },
+            "performance_theatre_fashion_style": { title: "Art Teacher, Costume and Jewellery Designer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-art-teacher-costume-and-jewellery-designer-2666789/" },
+            "performance_dance_fashion_style": { title: "Cosplayer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-cosplayer-2765432/" },
+            "craft_applied_fashion_style": { title: "Wearable Art and Fibre Artist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-wearable-art-and-fibre-artist-2764890/" },
+
+            // NO SPECIALTY - Diverse general careers
+            "no_specialty": { title: "Design Curator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-design-curator-2760175/" },
+            "no_specialty_arts_centres": { title: "Visitor Services Officer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-visitor-services-officer-2604567/" },
+            "no_specialty_community_education": { title: "Children's Gallery Curator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-childrens-gallery-curator-2609876/" },
+
+            // DISCIPLINE + MOTIVATION COMBINATIONS
+            // VISUAL FINE ART
+            "visual_fine_helping_healing": { title: "Art Experience Coordinator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-art-experience-coordinator-2629876/" },
+            "visual_fine_preserving_heritage": { title: "Time-Based Art Conservator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-time-based-art-conservator-2717433/" },
+            "visual_fine_technology_innovation": { title: "Freelance Arts Photographer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-freelance-arts-photographer-2617234/" },
+            "visual_fine_business_strategy": { title: "Art Adviser", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-art-adviser-2594567/" },
+            "visual_fine_storytelling_narrative": { title: "Picture Book Illustrator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-picture-book-illustrator-2589123/" },
+            "visual_fine_technical_mastery": { title: "Mount Maker", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-mount-maker-2770906/" },
+            "visual_fine_social_impact": { title: "Mural Artist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-mural-artist-2773456/" },
+
+            // VISUAL DESIGN
+            "visual_design_helping_healing": { title: "Design and Colour Consultant", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-design-and-colour-consultant-2699665/" },
+            "visual_design_preserving_heritage": { title: "Architect", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-architect-2605789/" },
+            "visual_design_technology_innovation": { title: "Architectural Photographer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-architectural-photographer-2738165/" },
+            "visual_design_business_strategy": { title: "Art Auction Specialist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-art-auction-specialist-2628345/" },
+            "visual_design_storytelling_narrative": { title: "Magazine Art Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-magazine-art-director-2740679/" },
+            "visual_design_technical_mastery": { title: "Book Designer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-book-designer-2583456/" },
+            "visual_design_social_impact": { title: "Performance Photographer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-performance-photographer-2643789/" },
+
+            // PERFORMANCE THEATRE
+            "performance_theatre_helping_healing": { title: "Drama Therapist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-drama-therapist-2672740/" },
+            "performance_theatre_preserving_heritage": { title: "Fight Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-fight-director-2584567/" },
+            "performance_theatre_technology_innovation": { title: "Venue Technical Manager", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-venue-and-technical-manager-2756425/" },
+            "performance_theatre_business_strategy": { title: "Director, Independent Theatre", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-director-independent-theatre-2753835/" },
+            "performance_theatre_storytelling_narrative": { title: "Actor", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-actor-2645564/" },
+            "performance_theatre_technical_mastery": { title: "Scenic Painter", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-scenic-painter-2764017/" },
+            "performance_theatre_social_impact": { title: "Theatre Technician", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-theatre-technician-2621987/" },
+
+            // PERFORMANCE DANCE
+            "performance_dance_helping_healing": { title: "Circus Acrobat", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-circus-acrobat-2621456/" },
+            "performance_dance_preserving_heritage": { title: "Set Designer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-set-designer-2598765/" },
+            "performance_dance_technology_innovation": { title: "Street Dancer/Street Dance Festival Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-street-dancer-street-dance-festival-director-2775456/" },
+            "performance_dance_business_strategy": { title: "Cruise Entertainer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-cruise-entertainer-2634567/" },
+            "performance_dance_storytelling_narrative": { title: "Choreographer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-choreographer-2639456/" },
+            "performance_dance_technical_mastery": { title: "Illusionist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-illusionist-2718569/" },
+            "performance_dance_social_impact": { title: "Juggler", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-juggler-2638234/" },
+
+            // MUSIC
+            "music_helping_healing": { title: "Chorus Master", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-chorus-master-2603456/" },
+            "music_preserving_heritage": { title: "Librettist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-librettist-2774993/" },
+            "music_technology_innovation": { title: "Soundscape Designer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-soundscape-designer-2659298/" },
+            "music_business_strategy": { title: "MusicNSW CEO", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-musicnsw-ceo-2774789/" },
+            "music_storytelling_narrative": { title: "Conductor", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-conductor-2758945/" },
+            "music_technical_mastery": { title: "Vocal Arranger", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-vocal-arranger-2642345/" },
+            "music_social_impact": { title: "Arts Broadcaster", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-arts-broadcaster-2702187/" },
+
+            // FILM & DIGITAL
+            "film_digital_helping_healing": { title: "Theatre Critic", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-theatre-critic-2764123/" },
+            "film_digital_preserving_heritage": { title: "Library and Museum Digital Strategist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-library-and-museum-digital-strategist-2589456/" },
+            "film_digital_technology_innovation": { title: "Assistant Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-assistant-director-2761584/" },
+            "film_digital_business_strategy": { title: "Hollywood Casting Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-hollywood-casting-director-2780628/" },
+            "film_digital_storytelling_narrative": { title: "Narrative Designer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-narrative-designer-2651907/" },
+            "film_digital_technical_mastery": { title: "Stunt Coordinator for Film and Television", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-stunt-coordinator-for-film-and-television-2646789/" },
+            "film_digital_social_impact": { title: "TV and Film Extra", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-tv-and-film-extra-2635789/" },
+
+            // LITERARY
+            "literary_helping_healing": { title: "Writing Coach", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-writing-coach-2773891/" },
+            "literary_preserving_heritage": { title: "Librarian", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-librarian-2754481/" },
+            "literary_technology_innovation": { title: "Literary Translator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-literary-translator-2587639/" },
+            "literary_business_strategy": { title: "Publishing Managing Editor", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-publishing-managing-editor-2665122/" },
+            "literary_storytelling_narrative": { title: "Playwright", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-playwright-2703245/" },
+            "literary_technical_mastery": { title: "Manuscript Assessor", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-manuscript-assessor-2750120/" },
+            "literary_social_impact": { title: "Freelance Arts Writer and Editor", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-freelance-arts-writer-and-editor-2622567/" },
+
+            // CRAFT & APPLIED
+            "craft_applied_helping_healing": { title: "Puppeteer and Puppet-maker", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-tamara-rewse-puppeteer-and-puppet-maker-2612345/" },
+            "craft_applied_preserving_heritage": { title: "Museum Preparator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-museum-preparator-2638901/" },
+            "craft_applied_technology_innovation": { title: "Design Curator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-design-curator-2760175/" },
+            "craft_applied_business_strategy": { title: "Gallery Retail Manager", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-gallery-retail-manager-2714448/" },
+            "craft_applied_storytelling_narrative": { title: "Ceramic Artist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-ceramic-artist-2623789/" },
+            "craft_applied_technical_mastery": { title: "Paper Artist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-paper-artist-2710217/" },
+            "craft_applied_social_impact": { title: "Art Installer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-art-installer-2632456/" }
+        };wood-collection-2771234/" },
+            "history_culture_institutions_heritage": { title: "Photography Curator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-photography-curator-2745729/" },
+            "visual_design_history_culture": { title: "Architectural Historian and Writer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-architectural-historian-and-writer-2658234/" },
+            "literary_history_culture": { title: "Librarian", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-librarian-2754481/" },
+            "history_culture_community_education": { title: "Interpretation and Content Development Officer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-interpretation-and-content-development-officer-2732481/" },
+            "history_culture_institutions_heritage_preserving": { title: "Library Manager, Museums Victoria", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-library-manager-museums-victoria-2604123/" },
+            "history_culture_fast_paced": { title: "Mona Director of Museum Concept and Vision", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-mona-director-of-museum-concept-and-vision-2601234/" },
+
+            // GAMES & INTERACTIVE
+            "games_interactive": { title: "Narrative Designer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-narrative-designer-2651907/" },
+            "games_interactive_arts_centres": { title: "Games Curator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-games-curator-2696516/" },
+            "games_interactive_technology_innovation": { title: "Library and Museum Digital Strategist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-library-and-museum-digital-strategist-2589456/" },
+            "film_digital_games_interactive": { title: "2D Type Artist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-2d-type-artist-2722309/" },
+            "literary_games_interactive": { title: "Audio Book Producer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-audio-book-producer-2626789/" },
+
+            // FASHION & STYLE
+            "fashion_style": { title: "Tattoo Artist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-tattoo-artist-2642238/" },
+            "craft_applied_fashion_style": { title: "Wearable Art and Fibre Artist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-wearable-art-and-fibre-artist-2764890/" },
+            "performance_theatre_fashion_style": { title: "Art Teacher, Costume and Jewellery Designer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-art-teacher-costume-and-jewellery-designer-2666789/" },
+            "fashion_style_alternative_spaces": { title: "Cosplayer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-cosplayer-2765432/" },
+            "visual_design_fashion_style": { title: "Fashion and Textiles Curator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-fashion-and-textiles-curator-2622345/" },
+            "fashion_style_fast_paced": { title: "Stunt Coordinator for Film and Television", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-stunt-coordinator-for-film-and-television-2646789/" },
+            "fashion_style_intimate_studios": { title: "Design and Colour Consultant", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-design-and-colour-consultant-2699665/" },
+
+            // NO SPECIALTY
+            "no_specialty": { title: "Design Curator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-design-curator-2760175/" },
+            "no_specialty_fast_paced": { title: "Tour Manager", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-tour-manager-2643487/" },
+            "no_specialty_arts_centres": { title: "Visitor Services Officer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-visitor-services-officer-2604567/" },
+            "no_specialty_community_education": { title: "Children's Gallery Curator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-childrens-gallery-curator-2609876/" },
+            "no_specialty_intimate_studios": { title: "Art Adviser", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-art-adviser-2594567/" },
+            "no_specialty_alternative_spaces": { title: "Art Tour Leader", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-art-tour-leader-2611789/" },
+
+            // DISCIPLINE + MOTIVATION COMBINATIONS
+            // VISUAL FINE ART
+            "visual_fine_helping_healing": { title: "Art Experience Coordinator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-art-experience-coordinator-2629876/" },
+            "visual_fine_technical_mastery": { title: "Mount Maker", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-mount-maker-2770906/" },
+            "visual_fine_storytelling_narrative": { title: "Picture Book Illustrator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-picture-book-illustrator-2589123/" },
+            "visual_fine_social_impact": { title: "Mural Artist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-mural-artist-2773456/" },
+            "visual_fine_preserving_heritage": { title: "Art Installer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-art-installer-2632456/" },
+            "visual_fine_technology_innovation": { title: "Freelance Arts Photographer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-freelance-arts-photographer-2617234/" },
+            "visual_fine_business_strategy": { title: "Studio Assistant", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-studio-assistant-2596234/" },
+
+            // VISUAL DESIGN
+            "visual_design_technology_innovation": { title: "Architectural Photographer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-architectural-photographer-2738165/" },
+            "visual_design_business_strategy": { title: "Art Auction Specialist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-art-auction-specialist-2628345/" },
+            "visual_design_storytelling_narrative": { title: "Magazine Art Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-magazine-art-director-2740679/" },
+            "visual_design_helping_healing": { title: "Performance Photographer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-performance-photographer-2643789/" },
+            "visual_design_social_impact": { title: "Freelance Arts Writer and Editor", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-freelance-arts-writer-and-editor-2622567/" },
+            "visual_design_technical_mastery": { title: "Book Designer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-book-designer-2583456/" },
+            "visual_design_preserving_heritage": { title: "Architect", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-architect-2605789/" },
+
+            // PERFORMANCE THEATRE
+            "performance_theatre_storytelling_narrative": { title: "Actor", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-actor-2645564/" },
+            "performance_theatre_business_strategy": { title: "Director, Independent Theatre", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-director-independent-theatre-2753835/" },
+            "performance_theatre_technical_mastery": { title: "Scenic Painter", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-scenic-painter-2764017/" },
+            "performance_theatre_technology_innovation": { title: "Venue Technical Manager", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-venue-and-technical-manager-2756425/" },
+            "performance_theatre_social_impact": { title: "Theatre Technician", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-theatre-technician-2621987/" },
+            "performance_theatre_helping_healing": { title: "Cabaret Artist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-cabaret-artist-2774893/" },
+            "performance_theatre_preserving_heritage": { title: "Fight Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-fight-director-2584567/" },
+
+            // PERFORMANCE DANCE
+            "performance_dance_storytelling_narrative": { title: "Choreographer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-choreographer-2639456/" },
+            "performance_dance_technology_innovation": { title: "Street Dancer/Street Dance Festival Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-street-dancer-street-dance-festival-director-2775456/" },
+            "performance_dance_helping_healing": { title: "Circus Acrobat", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-circus-acrobat-2621456/" },
+            "performance_dance_social_impact": { title: "Juggler", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-juggler-2638234/" },
+            "performance_dance_technical_mastery": { title: "Illusionist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-illusionist-2718569/" },
+            "performance_dance_business_strategy": { title: "Cruise Entertainer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-cruise-entertainer-2634567/" },
+            "performance_dance_preserving_heritage": { title: "Set Designer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-set-designer-2598765/" },
+
+            // MUSIC
+            "music_technology_innovation": { title: "Soundscape Designer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-soundscape-designer-2659298/" },
+            "music_business_strategy": { title: "MusicNSW CEO", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-musicnsw-ceo-2774789/" },
+            "music_storytelling_narrative": { title: "Conductor", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-conductor-2758945/" },
+            "music_helping_healing": { title: "Chorus Master", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-chorus-master-2603456/" },
+            "music_technical_mastery": { title: "Vocal Arranger", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-vocal-arranger-2642345/" },
+            "music_social_impact": { title: "Arts Broadcaster", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-arts-broadcaster-2702187/" },
+            "music_preserving_heritage": { title: "Librettist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-librettist-2774993/" },
+
+            // FILM & DIGITAL
+            "film_digital_business_strategy": { title: "Hollywood Casting Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-hollywood-casting-director-2780628/" },
+            "film_digital_storytelling_narrative": { title: "Assistant Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-assistant-director-2761584/" },
+            "film_digital_technical_mastery": { title: "TV and Film Extra", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-tv-and-film-extra-2635789/" },
+            "film_digital_helping_healing": { title: "Theatre Critic", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-theatre-critic-2764123/" },
+            "film_digital_social_impact": { title: "Art Magazine Editor", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-art-magazine-editor-2610234/" },
+            "film_digital_technology_innovation": { title: "Manuscript Assessor", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-manuscript-assessor-2750120/" },
+            "film_digital_preserving_heritage": { title: "Proofreader", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-proofreader-2645789/" },
+
+            // LITERARY
+            "literary_social_impact": { title: "Playwright", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-playwright-2703245/" },
+            "literary_storytelling_narrative": { title: "Publishing Managing Editor", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-publishing-managing-editor-2665122/" },
+            "literary_business_strategy": { title: "Literary Translator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-literary-translator-2587639/" },
+            "literary_technical_mastery": { title: "Peak Body Executive Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-peak-body-executive-director-2719234/" },
+            "literary_helping_healing": { title: "Disability Art Centre CEO", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-disability-art-centre-ceo-2618567/" },
+            "literary_technology_innovation": { title: "Aboriginal Art Centre Manager", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-aboriginal-art-centre-manager-2616234/" },
+            "literary_preserving_heritage": { title: "Artistic Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-artistic-director-2587432/" },
+
+            // CRAFT & APPLIED
+            "craft_applied_technical_mastery": { title: "Paper Artist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-paper-artist-2710217/" },
+            "craft_applied_storytelling_narrative": { title: "Ceramic Artist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-ceramic-artist-2623789/" },
+            "craft_applied_helping_healing": { title: "Puppeteer and Puppet-maker", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-tamara-rewse-puppeteer-and-puppet-maker-2612345/" },
+            "craft_applied_business_strategy": { title: "Gallery Retail Manager", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-gallery-retail-manager-2714448/" },
+            "craft_applied_social_impact": { title: "Community Engagement and Programming", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-community-engagement-and-programming-2774123/" },
+            "craft_applied_technology_innovation": { title: "Design Curator Alternative", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-design-curator-2760175/" },
+            "craft_applied_preserving_heritage": { title: "Gallery Retail Manager Alternative", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-gallery-retail-manager-2714448/" }
         };
 
         let currentQuestion = 0;
@@ -512,12 +724,7 @@
             const container = document.getElementById('options-container');
             container.innerHTML = '';
             
-            let availableOptions = question.options;
-            if (currentQuestion === 1 && answers[0]) {
-                availableOptions = question.options.filter(opt => !opt.condition || opt.condition === answers[0]);
-            }
-            
-            availableOptions.forEach(option => {
+            question.options.forEach(option => {
                 const div = document.createElement('div');
                 div.className = 'option';
                 div.onclick = () => selectOption(option.id, div);
@@ -565,38 +772,137 @@
             document.getElementById('next-btn').disabled = !answers[currentQuestion];
             
             if (currentQuestion === questions.length - 1) {
-                document.getElementById('next-btn').textContent = 'Get My Result';
+                document.getElementById('next-btn').textContent = 'Discover My Career ✨';
             } else {
-                document.getElementById('next-btn').textContent = 'Next';
+                document.getElementById('next-btn').textContent = 'Next →';
             }
         }
 
         function showResult() {
-            // Simple matching logic
             let career = null;
             
-            // Try specific combinations first
-            const key1 = `${answers[0]}_${answers[1]}_${answers[2]}`;
-            const key2 = `${answers[2]}_specialty`;
+            const discipline = answers[0];
+            const motivation = answers[1];
+            const hobby = answers[2];
+            const environment = answers[3];
+            const workStyle = answers[4];
+            const specialization = answers[5];
+            const finalMotivation = answers[6];
             
-            if (careers[key1]) {
-                career = careers[key1];
-            } else if (answers[2] !== 'none' && careers[key2]) {
-                career = careers[key2];
-            } else {
-                // Default fallbacks based on discipline
-                const disciplineDefaults = {
-                    'visual_fine': careers['visual_fine_illustration_none'],
-                    'visual_design': careers['visual_design_editorial_none'],
-                    'performance_theatre': careers['performance_theatre_acting_none'],
-                    'performance_dance': careers['performance_dance_circus_none'],
-                    'music': careers['music_musical_performance_none'],
-                    'film_digital': careers['film_digital_gaming_technology'],
-                    'literary': careers['literary_creative_writing_none'],
-                    'craft_applied': careers['craft_applied_fashion_none']
-                };
-                career = disciplineDefaults[answers[0]] || careers['default'];
+            console.log('Quiz answers:', { discipline, motivation, hobby, environment, workStyle, specialization, finalMotivation });
+            
+            // PRIORITY 1: Strong hobby matches with cross-disciplinary logic
+            if (hobby === 'law_justice') {
+                if (environment === 'institutions_heritage') {
+                    career = careerMappings['law_justice_institutions_heritage'];
+                } else if (environment === 'fast_paced') {
+                    career = careerMappings['law_justice_fast_paced'];
+                } else {
+                    career = careerMappings['law_justice'];
+                }
+            } 
+            else if (hobby === 'animals_nature') {
+                const disciplineAnimalKey = `${discipline}_animals_nature`;
+                if (careerMappings[disciplineAnimalKey]) {
+                    career = careerMappings[disciplineAnimalKey];
+                } else {
+                    career = careerMappings['animals_nature'];
+                }
             }
+            else if (hobby === 'events_experiences') {
+                const disciplineEventKey = `${discipline}_events_experiences`;
+                if (careerMappings[disciplineEventKey]) {
+                    career = careerMappings[disciplineEventKey];
+                } else if (environment === 'alternative_spaces') {
+                    career = careerMappings['events_experiences_alternative_spaces'];
+                } else if (environment === 'fast_paced') {
+                    career = careerMappings['events_experiences_fast_paced'];
+                } else if (environment === 'arts_centres') {
+                    career = careerMappings['events_experiences_arts_centres'];
+                } else {
+                    career = careerMappings['events_experiences'];
+                }
+            }
+            else if (hobby === 'psychology_therapy') {
+                const disciplinePsychKey = `${discipline}_psychology_therapy`;
+                if (careerMappings[disciplinePsychKey]) {
+                    if (discipline === 'performance_theatre' && environment === 'healing_wellness') {
+                        career = careerMappings['performance_theatre_psychology_therapy_healing_wellness'];
+                    } else {
+                        career = careerMappings[disciplinePsychKey];
+                    }
+                } else {
+                    career = careerMappings['psychology_therapy'];
+                }
+            }
+            else if (hobby === 'history_culture') {
+                const disciplineHistoryKey = `${discipline}_history_culture`;
+                if (careerMappings[disciplineHistoryKey]) {
+                    career = careerMappings[disciplineHistoryKey];
+                } else if (environment === 'institutions_heritage') {
+                    career = careerMappings['history_culture_institutions_heritage'];
+                } else {
+                    career = careerMappings['history_culture'];
+                }
+            }
+            else if (hobby === 'games_interactive') {
+                const disciplineGameKey = `${discipline}_games_interactive`;
+                if (careerMappings[disciplineGameKey]) {
+                    career = careerMappings[disciplineGameKey];
+                } else if (environment === 'arts_centres') {
+                    career = careerMappings['games_interactive_arts_centres'];
+                } else {
+                    career = careerMappings['games_interactive'];
+                }
+            }
+            else if (hobby === 'fashion_style') {
+                const disciplineFashionKey = `${discipline}_fashion_style`;
+                if (careerMappings[disciplineFashionKey]) {
+                    career = careerMappings[disciplineFashionKey];
+                } else {
+                    career = careerMappings['fashion_style'];
+                }
+            }
+            else if (hobby === 'no_specialty') {
+                if (environment === 'arts_centres') {
+                    career = careerMappings['no_specialty_arts_centres'];
+                } else if (environment === 'community_education') {
+                    career = careerMappings['no_specialty_community_education'];
+                } else {
+                    career = careerMappings['no_specialty'];
+                }
+            }
+            
+            // PRIORITY 2: Discipline + motivation combinations (fallback)
+            if (!career) {
+                const disciplineMotivationKey = `${discipline}_${motivation}`;
+                console.log('Trying discipline+motivation:', disciplineMotivationKey);
+                if (careerMappings[disciplineMotivationKey]) {
+                    career = careerMappings[disciplineMotivationKey];
+                }
+            }
+            
+            // PRIORITY 3: Just discipline-based fallbacks
+            if (!career) {
+                const disciplineFallbacks = {
+                    'visual_fine': careerMappings['visual_fine_helping_healing'],
+                    'visual_design': careerMappings['visual_design_technology_innovation'],
+                    'performance_theatre': careerMappings['performance_theatre_storytelling_narrative'],
+                    'performance_dance': careerMappings['performance_dance_storytelling_narrative'],
+                    'music': careerMappings['music_technology_innovation'],
+                    'film_digital': careerMappings['film_digital_business_strategy'],
+                    'literary': careerMappings['literary_social_impact'],
+                    'craft_applied': careerMappings['craft_applied_technical_mastery']
+                };
+                career = disciplineFallbacks[discipline];
+            }
+            
+            // Final fallback
+            if (!career) {
+                career = careerMappings['no_specialty'];
+            }
+            
+            console.log('Selected career:', career.title);
             
             document.getElementById('quiz-section').style.display = 'none';
             document.getElementById('result-section').style.display = 'block';
@@ -604,18 +910,10 @@
             document.getElementById('result-content').innerHTML = `
                 <div class="career-box">
                     <div class="career-title">${career.title}</div>
-                    <div class="career-desc">${career.desc}</div>
-                    <a href="${career.url}" target="_blank" class="career-link">Read Full Career Profile →</a>
                     
-                    <div class="next-steps">
-                        <h3>Your Next Steps:</h3>
-                        <ul>
-                            <li>Read the detailed career profile to learn about day-to-day responsibilities</li>
-                            <li>Research education and training pathways</li>
-                            <li>Consider reaching out to professionals in this field</li>
-                            <li>Explore related courses and opportunities at UOW</li>
-                        </ul>
-                    </div>
+                    <a href="${career.url}" target="_blank" class="career-link">
+                        📖 Read Full Career Interview
+                    </a>
                 </div>
             `;
         }
@@ -628,8 +926,8 @@
             showQuestion();
         }
 
-        // Start the quiz when page loads
-        window.onload = startQuiz;
+        // Initialize quiz when page loads
+        document.addEventListener('DOMContentLoaded', startQuiz);
     </script>
 </body>
 </html>
