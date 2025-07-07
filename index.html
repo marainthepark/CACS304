@@ -12,275 +12,247 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: #f4f1eb;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            line-height: 1.6;
+            padding: 30px 20px;
+            line-height: 1.5;
         }
 
         .container {
             background: white;
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 700px;
-            width: 100%;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 8px;
+            padding: 50px 40px;
+            max-width: 680px;
+            margin: 0 auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e8e3dc;
         }
 
         h1 {
-            color: #2d3748;
+            color: #2c3e50;
             text-align: center;
-            margin-bottom: 10px;
-            font-size: 2.5em;
-            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 2.2em;
+            font-weight: normal;
+            letter-spacing: 1px;
         }
 
         .subtitle {
             text-align: center;
-            color: #718096;
-            margin-bottom: 40px;
+            color: #7f8c8d;
+            margin-bottom: 45px;
             font-size: 1.1em;
+            font-style: italic;
         }
 
         .question-section {
             margin-bottom: 40px;
         }
 
-        .question-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
         .question-number {
-            color: #667eea;
-            font-weight: 600;
-            font-size: 1.1em;
+            color: #34495e;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .question {
-            font-size: 1.3em;
-            font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 25px;
+            font-size: 1.4em;
+            font-weight: normal;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            line-height: 1.4;
         }
 
         .option {
-            background: #f7fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 15px;
+            background: #fafafa;
+            border: 2px solid #e8e3dc;
+            border-radius: 6px;
+            padding: 22px;
+            margin-bottom: 12px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
+            transition: all 0.2s ease;
         }
 
         .option:hover {
-            background: #edf2f7;
-            border-color: #667eea;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+            background: #f0f0f0;
+            border-color: #c0392b;
+            transform: translateX(3px);
         }
 
         .option.selected {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: #c0392b;
             color: white;
-            border-color: #667eea;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.25);
+            border-color: #c0392b;
+            transform: translateX(3px);
         }
 
         .option-title {
-            font-weight: 600;
-            margin-bottom: 8px;
-            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 6px;
+            font-size: 1.05em;
         }
 
         .option-desc {
-            font-size: 0.95em;
-            opacity: 0.8;
-            line-height: 1.5;
+            font-size: 0.9em;
+            opacity: 0.85;
+            line-height: 1.4;
         }
 
         .buttons {
             display: flex;
             justify-content: space-between;
-            margin-top: 40px;
-            gap: 15px;
+            margin-top: 45px;
+            gap: 20px;
         }
 
         .btn {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 25px;
-            font-weight: 600;
+            padding: 12px 28px;
+            border: 2px solid #34495e;
+            border-radius: 4px;
+            font-weight: bold;
             cursor: pointer;
-            font-size: 1em;
-            transition: all 0.3s ease;
-            flex: 1;
-            max-width: 150px;
+            font-size: 0.95em;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: #34495e;
             color: white;
         }
 
         .btn-primary:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            background: #2c3e50;
+            transform: translateY(-1px);
         }
 
         .btn-primary:disabled {
-            background: #cbd5e0;
+            background: #bdc3c7;
+            border-color: #bdc3c7;
             cursor: not-allowed;
             transform: none;
-            box-shadow: none;
         }
 
         .btn-secondary {
-            background: #f7fafc;
-            color: #4a5568;
-            border: 2px solid #e2e8f0;
+            background: white;
+            color: #34495e;
         }
 
         .btn-secondary:hover:not(:disabled) {
-            background: #edf2f7;
-            border-color: #cbd5e0;
+            background: #ecf0f1;
         }
 
         .btn-secondary:disabled {
-            opacity: 0.5;
+            opacity: 0.4;
             cursor: not-allowed;
         }
 
         .progress {
             width: 100%;
-            height: 8px;
-            background: #e2e8f0;
-            border-radius: 4px;
+            height: 6px;
+            background: #ecf0f1;
             margin-bottom: 40px;
-            overflow: hidden;
+            border-radius: 0;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            border-radius: 4px;
-            transition: width 0.4s ease;
+            background: #c0392b;
+            transition: width 0.3s ease;
         }
 
         .result {
             display: none;
             text-align: center;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .result h2 {
-            color: #2d3748;
-            font-size: 2.2em;
-            margin-bottom: 30px;
-            font-weight: 700;
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 35px;
+            font-weight: normal;
         }
 
         .career-box {
-            background: linear-gradient(135deg, #f7fafc, #edf2f7);
-            border-radius: 20px;
-            padding: 40px;
-            margin: 30px 0;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 35px;
+            margin: 25px 0;
             text-align: left;
-            border: 2px solid #e2e8f0;
         }
 
         .career-title {
-            font-size: 2em;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 700;
+            font-size: 1.6em;
+            color: #c0392b;
+            font-weight: bold;
             margin-bottom: 25px;
             text-align: center;
+            line-height: 1.3;
         }
 
         .career-link {
             display: inline-block;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: #34495e;
             color: white;
-            padding: 18px 35px;
+            padding: 14px 30px;
             text-decoration: none;
-            border-radius: 30px;
-            font-weight: 600;
-            margin-bottom: 30px;
-            font-size: 1.1em;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 1em;
             width: 100%;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .career-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            background: #2c3e50;
+            transform: translateY(-1px);
         }
 
         .restart {
-            margin-top: 30px;
-            background: #f7fafc;
-            color: #4a5568;
-            border: 2px solid #e2e8f0;
+            margin-top: 25px;
+            background: white;
+            color: #7f8c8d;
+            border-color: #bdc3c7;
         }
 
         .restart:hover {
-            background: #edf2f7;
-            border-color: #cbd5e0;
+            background: #ecf0f1;
+            border-color: #95a5a6;
         }
 
         @media (max-width: 768px) {
             .container {
-                padding: 25px;
-                margin: 10px;
+                padding: 30px 25px;
+                margin: 0 10px;
             }
             
             h1 {
-                font-size: 2em;
+                font-size: 1.8em;
             }
             
             .buttons {
                 flex-direction: column;
                 gap: 15px;
             }
-
-            .btn {
-                max-width: none;
-            }
         }
 
         @media (max-width: 480px) {
+            body {
+                padding: 20px 15px;
+            }
+
             .option {
-                padding: 15px;
+                padding: 18px;
             }
 
             .career-box {
@@ -412,58 +384,71 @@
 
         // Comprehensive career mappings with improved cross-disciplinary logic
         const careerMappings = {
-            // LAW & JUSTICE - Strong hobby matches
+            // LAW & JUSTICE - Strong hobby matches with discipline-specific combinations
             "law_justice": { title: "Court Artist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-court-artist-2618234/" },
             "law_justice_institutions_heritage": { title: "Arts Lawyer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-arts-lawyer-2608234/" },
             "law_justice_fast_paced": { title: "Legal Editor", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-legal-editor-2738904/" },
+            "performance_theatre_law_justice": { title: "Fight Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-fight-director-2584567/" },
+            "literary_law_justice": { title: "Legal Editor", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-legal-editor-2738904/" },
+            "music_law_justice": { title: "Arts Broadcaster", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-arts-broadcaster-2702187/" },
             
-            // ANIMALS & NATURE - Strong hobby matches
+            // ANIMALS & NATURE - Strong hobby matches with discipline-specific combinations
             "animals_nature": { title: "Dog Wrangler", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-dog-wrangler-2738567/" },
             "visual_fine_animals_nature": { title: "Wildlife Illustrator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-wildlife-illustrator-2742683/" },
             "visual_design_animals_nature": { title: "Wildlife Photographer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-wildlife-illustrator-2742683/" },
             "craft_applied_animals_nature": { title: "Museum Preparator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-museum-preparator-2638901/" },
             "film_digital_animals_nature": { title: "Dog Wrangler", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-dog-wrangler-2738567/" },
+            "performance_theatre_animals_nature": { title: "Puppeteer and Puppet-maker", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-tamara-rewse-puppeteer-and-puppet-maker-2612345/" },
+            "literary_animals_nature": { title: "Freelance Arts Writer and Editor", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-freelance-arts-writer-and-editor-2622567/" },
 
-            // EVENTS & EXPERIENCES - Strong hobby matches
-            "events_experiences": { title: "Live Wedding Painter", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-live-wedding-painter-2736510/" },
-            "events_experiences_alternative_spaces": { title: "Festival Director of the Darwin Street Art Festival", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-festival-director-of-the-darwin-street-art-festival-2774567/" },
-            "events_experiences_fast_paced": { title: "Producer, Perth Festival", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-producer-perth-festival-2602789/" },
-            "events_experiences_arts_centres": { title: "Art Fair Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-art-fair-director-2644567/" },
-            "visual_design_events_experiences": { title: "Art Fair Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-art-fair-director-2644567/" },
-            "performance_dance_events_experiences": { title: "Spiegeltents Australia Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-alison-neville-director-spiegeltents-australia-2774345/" },
-            "performance_theatre_events_experiences": { title: "Cabaret Artist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-cabaret-artist-2774893/" },
-            "music_events_experiences": { title: "Producer, Perth Festival", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-producer-perth-festival-2602789/" },
-            "craft_applied_events_experiences": { title: "Art Fair Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-art-fair-director-2644567/" },
-
-            // PSYCHOLOGY & THERAPY - Strong hobby matches
+            // PSYCHOLOGY & THERAPY - Strong hobby matches with discipline-specific combinations
             "psychology_therapy": { title: "Bibliotherapist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-bibliotherapist-2673576/" },
             "performance_theatre_psychology_therapy": { title: "Drama Therapist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-drama-therapist-2672740/" },
             "performance_theatre_psychology_therapy_healing_wellness": { title: "Intimacy Coordinator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-intimacy-coordinator-2637453/" },
             "performance_dance_psychology_therapy": { title: "Physical Comedy and Clown Teacher", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-physical-comedy-and-clown-teacher-2665789/" },
             "literary_psychology_therapy": { title: "Writing Coach", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-writing-coach-2773891/" },
+            "visual_fine_psychology_therapy": { title: "Art Experience Coordinator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-art-experience-coordinator-2629876/" },
+            "craft_applied_psychology_therapy": { title: "Puppeteer and Puppet-maker", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-tamara-rewse-puppeteer-and-puppet-maker-2612345/" },
 
-            // HISTORY & CULTURE - Strong hobby matches
+            // HISTORY & CULTURE - Strong hobby matches with discipline-specific combinations
             "history_culture": { title: "Time-Based Art Conservator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-time-based-art-conservator-2717433/" },
             "history_culture_institutions_heritage": { title: "Photography Curator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-photography-curator-2745729/" },
             "visual_design_history_culture": { title: "Architectural Historian and Writer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-architectural-historian-and-writer-2658234/" },
             "literary_history_culture": { title: "Art Magazine Editor", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-art-magazine-editor-2610234/" },
             "craft_applied_history_culture": { title: "Time-Based Art Conservator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-time-based-art-conservator-2717433/" },
+            "performance_theatre_history_culture": { title: "Fight Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-fight-director-2584567/" },
+            "music_history_culture": { title: "Librettist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-librettist-2774993/" },
 
-            // GAMES & INTERACTIVE - Strong hobby matches
+            // GAMES & INTERACTIVE - Strong hobby matches with discipline-specific combinations
             "games_interactive": { title: "Narrative Designer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-narrative-designer-2651907/" },
             "games_interactive_arts_centres": { title: "Games Curator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-games-curator-2696516/" },
             "film_digital_games_interactive": { title: "Games Curator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-games-curator-2696516/" },
             "visual_design_games_interactive": { title: "2D Type Artist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-2d-type-artist-2722309/" },
             "literary_games_interactive": { title: "Narrative Designer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-narrative-designer-2651907/" },
             "music_games_interactive": { title: "Audio Book Producer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-audio-book-producer-2626789/" },
+            "performance_theatre_games_interactive": { title: "Actor", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-actor-2645564/" },
+            "craft_applied_games_interactive": { title: "Ceramic Artist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-ceramic-artist-2623789/" },
 
-            // FASHION & STYLE - Strong hobby matches
+            // FASHION & STYLE - Strong hobby matches with discipline-specific combinations
             "fashion_style": { title: "Tattoo Artist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-tattoo-artist-2642238/" },
             "visual_fine_fashion_style": { title: "Tattoo Artist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-tattoo-artist-2642238/" },
             "visual_design_fashion_style": { title: "Fashion and Textiles Curator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-fashion-and-textiles-curator-2622345/" },
             "performance_theatre_fashion_style": { title: "Art Teacher, Costume and Jewellery Designer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-art-teacher-costume-and-jewellery-designer-2666789/" },
             "performance_dance_fashion_style": { title: "Cosplayer", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-cosplayer-2765432/" },
             "craft_applied_fashion_style": { title: "Wearable Art and Fibre Artist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-wearable-art-and-fibre-artist-2764890/" },
+            "literary_fashion_style": { title: "Freelance Arts Writer and Editor", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-freelance-arts-writer-and-editor-2622567/" },
+
+            // EVENTS & EXPERIENCES - Strong hobby matches with discipline-specific combinations
+            "events_experiences": { title: "Live Wedding Painter", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-live-wedding-painter-2736510/" },
+            "events_experiences_alternative_spaces": { title: "Festival Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-festival-director-of-the-darwin-street-art-festival-2774567/" },
+            "events_experiences_fast_paced": { title: "Festival Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-festival-director-of-the-darwin-street-art-festival-2774567/" },
+            "events_experiences_arts_centres": { title: "Art Fair Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-art-fair-director-2644567/" },
+            "visual_design_events_experiences": { title: "Art Fair Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-art-fair-director-2644567/" },
+            "performance_dance_events_experiences": { title: "Spiegeltents Australia Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-alison-neville-director-spiegeltents-australia-2774345/" },
+            "performance_theatre_events_experiences": { title: "Cabaret Artist", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-cabaret-artist-2774893/" },
+            "music_events_experiences": { title: "Festival Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-festival-director-of-the-darwin-street-art-festival-2774567/" },
+            "craft_applied_events_experiences": { title: "Art Fair Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-art-fair-director-2644567/" },
+            "film_digital_events_experiences": { title: "Festival Director", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-festival-director-of-the-darwin-street-art-festival-2774567/" },
 
             // NO SPECIALTY - Diverse general careers
             "no_specialty": { title: "Design Curator", url: "https://www.artshub.com.au/news/career-advice/so-you-want-my-arts-job-design-curator-2760175/" },
@@ -628,7 +613,11 @@
             
             // PRIORITY 1: Strong hobby matches with cross-disciplinary logic
             if (hobby === 'law_justice') {
-                if (environment === 'institutions_heritage') {
+                // Check for discipline-specific law combinations first
+                const disciplineLawKey = `${discipline}_law_justice`;
+                if (careerMappings[disciplineLawKey]) {
+                    career = careerMappings[disciplineLawKey];
+                } else if (environment === 'institutions_heritage') {
                     career = careerMappings['law_justice_institutions_heritage'];
                 } else if (environment === 'fast_paced') {
                     career = careerMappings['law_justice_fast_paced'];
@@ -717,13 +706,13 @@
                 }
             }
             
-            // PRIORITY 3: Just discipline-based fallbacks
+            // PRIORITY 3: Just discipline-based fallbacks - PERFORMANCE SHOULD NEVER GET COURT ARTIST
             if (!career) {
                 const disciplineFallbacks = {
                     'visual_fine': careerMappings['visual_fine_helping_healing'],
                     'visual_design': careerMappings['visual_design_technology_innovation'],
-                    'performance_theatre': careerMappings['performance_theatre_storytelling_narrative'],
-                    'performance_dance': careerMappings['performance_dance_storytelling_narrative'],
+                    'performance_theatre': careerMappings['performance_theatre_storytelling_narrative'], // Should get Actor
+                    'performance_dance': careerMappings['performance_dance_storytelling_narrative'], // Should get Choreographer
                     'music': careerMappings['music_technology_innovation'],
                     'film_digital': careerMappings['film_digital_business_strategy'],
                     'literary': careerMappings['literary_social_impact'],
@@ -732,7 +721,7 @@
                 career = disciplineFallbacks[discipline];
             }
             
-            // Final fallback
+            // Final fallback - should never reach this for performance students
             if (!career) {
                 career = careerMappings['no_specialty'];
             }
